@@ -7,5 +7,6 @@ use contatoagenda\Http\Controllers\Controller;
 
 class AdminController extends Controller
 {
-    //
+
+
 }

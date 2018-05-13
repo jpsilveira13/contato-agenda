@@ -67,7 +67,7 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => contatoagenda\User::class,
+            'model' => \contatoagenda\Models\User::class,
         ],
 
         // 'users' => [
