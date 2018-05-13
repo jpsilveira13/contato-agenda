@@ -7,5 +7,5 @@ use contatoagenda\Http\Controllers\Controller;
 
 class SiteController extends Controller
 {
-    //
+
 }
