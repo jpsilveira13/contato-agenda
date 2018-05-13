@@ -14,3 +14,9 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+//rotas do login, cadastro e trocar senha.
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
