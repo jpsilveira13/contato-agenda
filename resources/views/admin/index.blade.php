@@ -7,7 +7,7 @@
 
     <link href="{{asset('admin/dist/css/bootstrap.min.css')}}" rel="stylesheet">
     <link href="{{asset('admin/dist/css/datepicker3.css')}}" rel="stylesheet">
-    <link href="{{asset('admin/css/styles.css')}}" rel="stylesheet">
+    <link href="{{asset('admin/css/admin.css')}}" rel="stylesheet">
 
     <!--Icons-->
     <script src="{{asset('admin/dist/js/lumino.glyphs.js')}}"></script>
@@ -55,24 +55,12 @@
     <ul class="nav menu">
         <li class="active"><a href="{{url('/admin/home')}}"><svg class="glyph stroked dashboard-dial"><use xlink:href="#stroked-dashboard-dial"></use></svg> Informações</a></li>
 
-        @if(auth()->user()->tipo > 0)
-            <li class="parent"><a href="{{url('admin/gerencia/noticias')}}"><svg class="glyph stroked gear"><use xlink:href="#stroked-gear"/></svg>
-                    Criar Notícias</a></li>
-            <li class="parent"><a href="{{url('admin/gerencia/arquivos')}}"><svg class="glyph stroked tag"><use xlink:href="#stroked-tag"/></svg>
-                    Criar Manuais</a></li>
-            <li class="parent"><a href="{{url('admin/gerencia/usuarios0p-ç')}}"><svg class="glyph stroked male user "><use xlink:href="#stroked-male-user"/></svg>
 
-                    Listagem Usuários</a></li>
-            <li class="parent"><a href="{{url('admin/gerencia/logs')}}"><svg class="glyph stroked table"><use xlink:href="#stroked-table"/></svg>
-                    Log de Eventos</a></li>
-        @endif
+            <li class="parent"><a href="{{route('usuario')}}"><svg class="glyph stroked male user "><use xlink:href="#stroked-male-user"/></svg>
+                    Usuários</a></li>
+            <li class="parent"><a href="{{route('agenda')}}"><svg class="glyph stroked email"><use xlink:href="#stroked-email"/></svg>
+                    Agendas</a></li>
 
-
-
-        <li class="parent"><a href="{{url('admin/manuais')}}"><svg class="glyph stroked clipboard with paper"><use xlink:href="#stroked-clipboard-with-paper"/></svg>
-                Arquivos</a></li>
-        <li class="parent"><a href="{{url('admin/videos')}}"><svg class="glyph stroked camcorder"><use xlink:href="#stroked-camcorder"/></svg>
-                Escola Inovar</a></li>
     </ul>
 </div><!--/.sidebar-->
 

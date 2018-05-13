@@ -9,4 +9,7 @@ class AdminController extends Controller
 {
 
 
+    public function principal(){
+        return view('admin.principal');
+    }
 }
