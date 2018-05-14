@@ -38,6 +38,12 @@ Route::group(['middleware' => 'auth', 'where' => ['id' => '[0-9]+']], function (
                 'as' => 'agenda',
                 'uses' => 'Admin\AgendaController@principal'
             ]);
+            Route::name('nova.agenda')->get('novo','Admin\AgendaController@telaCriacao');
+            Route::name('post.agenda')->post('salvar-agenda','Admin\AgendaController@salvarAgenda');
+
+            Route::name('editar.agenda')->get('editar-agenda/{id}','Admin\AgendaController@editarAgenda');
+            Route::name('editar.salvar.agenda')->post('editar-salvar-agenda/{id}','Admin\AgendaController@updateAgenda');
+            Route::name('remover.agenda')->get('remover-usuario/{id}','Admin\AgendaController@removerAgenda');
 
         });
 

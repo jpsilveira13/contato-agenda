@@ -15,9 +15,9 @@ class CreateAgendaTable extends Migration
     {
         Schema::create('agenda', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nome',250);
+            $table->string('nome',250)->unique();
             $table->string('email',125);
-            $table->string('telefone',35);
+            $table->string('telefone',35)->unique();
             $table->string('url_foto',250);
             $table->date('data_nascimento');
             $table->timestamps();

@@ -80,7 +80,9 @@
 <script src="{{asset('admin/js/easypiechart.js')}}"></script>
 <script src="{{asset('admin/js/easypiechart-data.js')}}"></script>
 <script src="{{asset('admin/dist/js/bootstrap-datepicker.js')}}"></script>
-<script src="{{asset('jquery-1.11.1.min.11.1.min')}}"></script>
+@yield('js-mascara')
+<script src="{{asset('admin/js/admin.js')}}"></script>
+
 
 <script>
     $('#calendar').datepicker({
