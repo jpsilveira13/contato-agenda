@@ -32,8 +32,8 @@ class UsuarioController extends Controller
         $getUsuario->password = Hash::make($getUsuario->password);
 
         if($getUsuario->save()){
-         $request->session()->flash('alert-success','Salvo com sucesso!');
-         return redirect()->route('usuario');
+            $request->session()->flash('alert-success','Salvo com sucesso!');
+            return redirect()->route('usuario');
         }else{
             $request->session()->flash('alert-error', 'Ops.. Houve um erro ao salvar!');
             return redirect()->back();
@@ -46,6 +46,14 @@ class UsuarioController extends Controller
     }
 
     public function updateUsuario($id,UpdateUsuarioRequest $request){
+
+
+        if($request->filled('email') &&  $request->usuario_email != $request->email  ){
+
+
+            $request->session()->flash('alert-error', 'Ops.. Existe um email com essa conta cadastrada!');
+            return redirect()->back();
+        }
 
         if($this->usuario->find($id)->update($request->all())){
             $request->session()->flash('alert-success', 'Salvo com sucesso!');

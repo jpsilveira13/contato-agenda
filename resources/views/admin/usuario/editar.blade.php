@@ -4,11 +4,18 @@
         <div class="col-lg-12">
             <div class="panel panel-default">
                 <div class="panel-heading">Cadastro de Usuário</div>
+                <div class="row">
+                    <div class="col-md-12">
+                        @if(Session::has('alert-error'))
+                            <div class="alert alert-erro"><span class="glyphicon glyphicon-remove"></span><em> {!! session('alert-error') !!}</em></div>
+                        @endif
+                    </div>
+                </div>
                 <div class="panel-body">
                     <div class="col-md-12">
                         <form action="{{route('editar.salvar.usuario',[$usuario->id])}}" method="POST" class="form-group" role="form">
                             @csrf
-                            <input type="hidden" name="user_id" value="{{$usuario->id}}" />
+                            <input type="hidden" name="usuario_email" value="{{$usuario->email}}" />
 
                             <div class="form-group">
                                 <label>Nome* </label>
