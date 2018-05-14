@@ -2,9 +2,12 @@
 
 namespace contatoagenda\Http\Controllers\Admin;
 
+use contatoagenda\Http\Requests\SalvarAgendaRequest;
 use contatoagenda\Models\Agenda;
+use Faker\Provider\DateTime;
 use Illuminate\Http\Request;
 use contatoagenda\Http\Controllers\Controller;
+use Intervention\Image\Facades\Image;
 
 class AgendaController extends Controller
 {
@@ -24,6 +27,22 @@ class AgendaController extends Controller
 
     public function telaCriacao(){
         return view('admin.agenda.novo');
+    }
+
+    public function salvarAgenda(SalvarAgendaRequest $request){
+
+        $agenda = $this->agenda->fill($request->all());
+        $agenda->data_nascimento = \DateTime::createFromFormat('d/m/Y', $agenda->data_nascimento)->format('Y-m-d');
+        $imagem = $request->file('arquivo');
+
+        $agenda->url_foto = md5(date('Ymdhms').$imagem->getClientOriginalName()).'.'.$imagem->getClientOriginalExtension();
+        $path = public_path().'/admin/imagens/'.$agenda->url_foto;
+        Image::make($imagem->getRealPath())->resize(160,160)->save($path);
+        if($agenda->save()){
+            $request->session()->flash('alert-success','Agenda cadastrada com sucesso!');
+            return redirect()->route('agenda');
+        }
+
     }
 
 }

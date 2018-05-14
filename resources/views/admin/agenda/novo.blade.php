@@ -55,7 +55,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Telefone * </label>
-                                <input id="email" type="email" class="form-control{{ $errors->has('telefone') ? ' is-invalid' : '' }}" name="telefone" value="{{ old('telefone') }}" required>
+                                <input id="email" type="text" class="telefone form-control{{ $errors->has('telefone') ? ' is-invalid' : '' }}" name="telefone" value="{{ old('telefone') }}" required>
                                 @if ($errors->has('telefone'))
                                     <span class="invalid-feedback">
                                         <strong>{{ $errors->first('telefone') }}</strong>

@@ -42,7 +42,7 @@
                             <tr>
                                 <td class="vertical-middle">{{$agenda->id}}</td>
                                 <td class="vertical-middle" data-title="Mapa">
-                                    <img class="group list-group-image content-img-sugestao lazy transition-img" src="https://maps.googleapis.com/maps/api/staticmap?sensor=false&amp;center=-19.699780099999998,-47.96321880000001&amp;zoom=14&amp;size=300x400&amp;markers=color:blue|label:S|-19.699780099999998,-47.96321880000001&amp;key=AIzaSyDxQZuypz7a_tl3H_AfEIICPl0CQdqqHHg" width="80" height="80" alt="titulo imagem">
+                                    <img class="group list-group-image content-img-sugestao lazy transition-img" src="{{url('admin/imagens')}}/{{$agenda->url_foto}}" width="80" height="80" alt="titulo imagem">
                                 </td>
                                 <td class="vertical-middle" style="text-align: left">{{$agenda->nome}}</td>
                                 <td class="vertical-middle" style="text-align: left">{{$agenda->email}}</td>
