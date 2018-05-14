@@ -27,8 +27,8 @@ class SalvarAgendaRequest extends FormRequest
             'nome' => 'required|string|max:255|unique:agenda',
             'url_foto' => 'mimes:jpeg,bmp,png|max:1000',
             'email' => 'required|string|max:255|',
-            'telefone' => 'required|string|max:255|',
-            'data_nascimento' => 'required|unique:agenda',
+            'telefone' => 'required|string|max:255|unique:agenda',
+            'data_nascimento' => 'required',
 
         ];
     }

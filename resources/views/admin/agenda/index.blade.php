@@ -47,7 +47,7 @@
                                 <td class="vertical-middle" style="text-align: left">{{$agenda->nome}}</td>
                                 <td class="vertical-middle" style="text-align: left">{{$agenda->email}}</td>
                                 <td class="vertical-middle" style="text-align: left">{{$agenda->telefone}}</td>
-                                <td class="vertical-middle">{{ date("d/m/Y H:i:s", strtotime($agenda->data_nascimento)) }}</td>
+                                <td class="vertical-middle">{{ date("d/m/Y", strtotime($agenda->data_nascimento)) }}</td>
                                 <td class="vertical-middle"><a class="btn btn-primary btn-xs" href="{{route('editar.agenda',['id'=> $agenda->id])}}"><span class="glyphicon glyphicon-pencil"></span></a></td>
                                 <td class="vertical-middle"><a class="delete btn btn-danger btn-xs" href="{{route('remover.agenda',['id' => $agenda->id])}}"><span class="glyphicon glyphicon-trash"></span></a></td>
                             </tr>
