@@ -47,11 +47,11 @@ Route::group(['middleware' => 'auth', 'where' => ['id' => '[0-9]+']], function (
                 'uses' => 'Admin\UsuarioController@principal'
             ]);
 
-            Route::name('novo.usuario')->get('listagem','Admin\UsuarioController@telaCriacao');
+            Route::name('novo.usuario')->get('novo','Admin\UsuarioController@telaCriacao');
             Route::name('post.usuario')->post('salvar-usuario','Admin\UsuarioController@salvarUsuario');
 
             Route::name('editar.usuario')->get('editar-usuario/{id}','Admin\UsuarioController@editarUsuario');
-            Route::name('editar.salvar.usuario')->get('editar-salvar-usuario/{id}','Admin\UsuarioController@updateUsuario');
+            Route::name('editar.salvar.usuario')->post('editar-salvar-usuario/{id}','Admin\UsuarioController@updateUsuario');
             Route::name('remover.usuario')->get('remover-usuario/{id}','Admin\UsuarioController@removerUsuario');
 
         });
