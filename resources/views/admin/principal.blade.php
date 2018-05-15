@@ -6,13 +6,9 @@
             <h1 class="page-header">Principal</h1>
         </div>
     </div><!--/.row-->
-    <div style="margin-bottom: 10px" class="row">
-        <div class="col-lg-12">
-       teste
-        </div>
-    </div><!--/.row-->
+
     <div class="row">
-        <a href="{{url('admin/videos')}}">
+        <a href="{{route('novo.usuario')}}">
             <div class="col-xs-6 col-md-3">
                 <div class="panel panel-default">
                     <div class="panel-body easypiechart-panel">
@@ -23,7 +19,7 @@
                 </div>
             </div>
         </a>
-        <a href="http://inovarlocacoes.com/webmail" target="_blank">
+        <a href="{{route('nova.agenda')}}">
             <div class="col-xs-6 col-md-3">
                 <div class="panel panel-default">
                     <div class="panel-body easypiechart-panel">

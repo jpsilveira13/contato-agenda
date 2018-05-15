@@ -15,8 +15,6 @@
                     <div class="col-md-12">
                         <form action="{{route('editar.salvar.usuario',[$usuario->id])}}" method="POST" class="form-group" role="form">
                             @csrf
-                            <input type="hidden" name="usuario_email" value="{{$usuario->email}}" />
-
                             <div class="form-group">
                                 <label>Nome* </label>
                                 <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{$usuario->name}}" required autofocus>

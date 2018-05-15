@@ -3,12 +3,11 @@
 namespace contatoagenda\Http\Controllers\Admin;
 
 use contatoagenda\Http\Requests\SalvarUsuarioRequest;
-use contatoagenda\Http\Requests\UpdateUsuarioRequest;
 use contatoagenda\Models\User;
 use Illuminate\Http\Request;
 use contatoagenda\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Input;
+
 
 class UsuarioController extends Controller
 {
@@ -46,13 +45,13 @@ class UsuarioController extends Controller
         return view('admin.usuario.editar',compact('usuario'));
     }
 
-    public function updateUsuario($id,UpdateUsuarioRequest $request){
+    public function updateUsuario($id,Request $request){
 
-
-        if($request->filled('email') &&  $request->usuario_email != $request->email  ){
-            $request->session()->flash('alert-error', 'Ops.. Existe um email com essa conta cadastrada!');
-            return redirect()->back();
-        }
+        //validacao usuario
+        $this->validate($request,array(
+            'name' => 'required|string|max:255',
+            'email' => "required|email|max:255|unique:users,email,$id",
+        ));
 
         if($this->usuario->find($id)->update($request->all())){
             $request->session()->flash('alert-success', 'Salvo com sucesso!');

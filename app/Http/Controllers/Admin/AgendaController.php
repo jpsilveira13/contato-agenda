@@ -3,9 +3,7 @@
 namespace contatoagenda\Http\Controllers\Admin;
 
 use contatoagenda\Http\Requests\SalvarAgendaRequest;
-use contatoagenda\Http\Requests\UpdateAgendaRequest;
 use contatoagenda\Models\Agenda;
-
 use Illuminate\Http\Request;
 use contatoagenda\Http\Controllers\Controller;
 use Intervention\Image\Facades\Image;
@@ -51,16 +49,20 @@ class AgendaController extends Controller
     }
 
 
-    public function updateAgenda(UpdateAgendaRequest $request,$id){
+    public function updateAgenda(Request $request,$id){
+        //validacao dos update
+
+        $this->validate($request,array(
+            'nome' => "required|string|max:255|unique:agenda,nome,$id",
+            'url_foto' => 'mimes:jpeg,bmp,png|max:1000',
+            'email' => 'required|string|max:255|',
+            'telefone' => "required|string|max:255|unique:agenda,telefone,$id",
+            'data_nascimento' => 'required',
+        ));
         $agenda = $this->agenda->fill($request->all());
 
         $agendaBanco = $this->agenda->find($id);
 
-        if($request->filled('nome') && $request){
-            dd('possui');
-        }else{
-            dd('nao possui');
-        }
         if(!empty($request->file('arquivo'))){
 
             if(file_exists(public_path().'/admin/imagens/'.$agendaBanco->url_foto)){

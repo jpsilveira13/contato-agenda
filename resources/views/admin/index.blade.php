@@ -33,11 +33,16 @@
             <a class="navbar-brand" href="{{'/admin/home'}}">Sistema Agenda</a>
             <ul class="user-menu">
                 <li class="dropdown pull-right">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><svg class="glyph stroked male-user"><use xlink:href="#stroked-male-user"></use></svg> Olá, {{ strstr(auth()->user()->name,' ',true)  }} <span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><svg class="glyph stroked male-user"><use xlink:href="#stroked-male-user"></use></svg> Olá, {{ auth()->user()->name}} <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a href="#"><svg class="glyph stroked male-user"><use xlink:href="#stroked-male-user"></use></svg> Perfil</a></li>
-                        <li><a href="#"><svg class="glyph stroked gear"><use xlink:href="#stroked-gear"></use></svg> Configurações</a></li>
-                        <li><a href="{{url('auth/logout')}}"><svg class="glyph stroked cancel"><use xlink:href="#stroked-cancel"></use></svg> Sair</a></li>
+
+                        <li><a href="{{ route('logout') }}"
+                            onclick="event.preventDefault();
+                            document.getElementById('logout-form').submit();"><svg class="glyph stroked cancel"><use xlink:href="#stroked-cancel"></use></svg> Sair</a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
+                        </li>
                     </ul>
                 </li>
             </ul>
@@ -66,7 +71,9 @@
 
 <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
     <div class="row">
-        <div class="alert alert-info alert-dismissable">                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>                <i class="fa fa-info-circle"></i><strong>Seja bem vindo, </strong> {{auth()->user()->name}}  </div>
+        <div class="alert alert-info alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+            <i class="fa fa-info-circle"></i><strong>Seja bem vindo, </strong> {{auth()->user()->name}}  </div>
     </div><!--/.row-->
     @yield('content')
 </div>	<!--/.main-->
@@ -75,34 +82,11 @@
 <script src="{{asset('admin/dist/js/bootstrap.min.js')}}"></script>
 <script src="https://use.fontawesome.com/9a93b47e91.js"></script>
 
-<script src="{{asset('admin/js/chart.min.js')}}"></script>
-<script src="{{asset('admin/js/chart-data.js')}}"></script>
-<script src="{{asset('admin/js/easypiechart.js')}}"></script>
-<script src="{{asset('admin/js/easypiechart-data.js')}}"></script>
+
 <script src="{{asset('admin/dist/js/bootstrap-datepicker.js')}}"></script>
 @yield('js-mascara')
 <script src="{{asset('admin/js/admin.js')}}"></script>
 
-
-<script>
-    $('#calendar').datepicker({
-    });
-
-    !function ($) {
-        $(document).on("click","ul.nav li.parent > a > span.icon", function(){
-            $(this).find('em:first').toggleClass("glyphicon-minus");
-        });
-        $(".sidebar span.icon").find('em:first').addClass("glyphicon-plus");
-    }(window.jQuery);
-
-    $(window).on('resize', function () {
-        if ($(window).width() > 768) $('#sidebar-collapse').collapse('show')
-    })
-    $(window).on('resize', function () {
-        if ($(window).width() <= 767) $('#sidebar-collapse').collapse('hide')
-    })
-
-</script>
 </body>
 
 </html>

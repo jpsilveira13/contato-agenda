@@ -24,10 +24,10 @@ class SalvarAgendaRequest extends FormRequest
     public function rules()
     {
         return [
-            'nome' => 'required|string|max:255|unique:agenda',
+            'nome' => 'required|string|max:255|unique:agenda,nome',
             'url_foto' => 'mimes:jpeg,bmp,png|max:1000',
             'email' => 'required|string|max:255|',
-            'telefone' => 'required|string|max:255|unique:agenda',
+            'telefone' => 'required|string|max:255|unique:agenda,telefone',
             'data_nascimento' => 'required',
 
         ];

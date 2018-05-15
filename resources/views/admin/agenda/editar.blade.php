@@ -9,12 +9,17 @@
         <div class="col-lg-12">
             <div class="panel panel-default">
                 <div class="panel-heading">Editar agenda do usuario: {{$agenda->nome}}</div>
+                <div class="row">
+                    <div class="col-md-12">
+                        @if(Session::has('alert-error'))
+                            <div class="alert alert-erro"><span class="glyphicon glyphicon-remove"></span><em> {!! session('alert-error') !!}</em></div>
+                        @endif
+                    </div>
+                </div>
                 <div class="panel-body">
                     <div class="col-md-12">
                         <form action="{{ route('editar.salvar.agenda',[$agenda->id]) }}" method="POST" enctype="multipart/form-data" class="form-group" role="form">
                             @csrf
-                            <input type="hidden" name="nome_agenda" value="{{$agenda->nome}}" />
-                            <input type="hidden" name="telefone_agenda" value="{{$agenda->telefone}}" />
                             <div class="form-group">
                                 <div class="file-upload">
                                     <button class="file-upload-btn" type="button" onclick="$('.file-upload-input').trigger( 'click' )">Adicionar Imagem</button>
