@@ -4,11 +4,11 @@ namespace contatoagenda\Http\Controllers\Admin;
 
 use contatoagenda\Http\Requests\SalvarAgendaRequest;
 use contatoagenda\Models\Agenda;
-use Faker\Provider\DateTime;
+
 use Illuminate\Http\Request;
 use contatoagenda\Http\Controllers\Controller;
 use Intervention\Image\Facades\Image;
-
+use Illuminate\Support\Facades\File;
 class AgendaController extends Controller
 {
 
@@ -42,6 +42,26 @@ class AgendaController extends Controller
             $request->session()->flash('alert-success','Agenda cadastrada com sucesso!');
             return redirect()->route('agenda');
         }
+
+    }
+
+
+    public function removerAgenda(Request $request,$id){
+        $agenda = $this->agenda->find($id);
+
+        if($agenda->url_foto){
+
+            if(file_exists(public_path().'/admin/imagens/'.$agenda->url_foto)){
+
+                File::delete(public_path().'/admin/imagens/'.$agenda->url_foto);
+
+            }
+        }
+
+            $agenda->delete();
+            $request->session()->flash('alert-success','Agenda deletada com sucesso!');
+            return redirect()->route('agenda');
+
 
     }
 

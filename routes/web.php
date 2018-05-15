@@ -43,7 +43,7 @@ Route::group(['middleware' => 'auth', 'where' => ['id' => '[0-9]+']], function (
 
             Route::name('editar.agenda')->get('editar-agenda/{id}','Admin\AgendaController@editarAgenda');
             Route::name('editar.salvar.agenda')->post('editar-salvar-agenda/{id}','Admin\AgendaController@updateAgenda');
-            Route::name('remover.agenda')->get('remover-usuario/{id}','Admin\AgendaController@removerAgenda');
+            Route::name('remover.agenda')->get('remover-agenda/{id}','Admin\AgendaController@removerAgenda');
 
         });
 
