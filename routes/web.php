@@ -45,6 +45,10 @@ Route::group(['middleware' => 'auth', 'where' => ['id' => '[0-9]+']], function (
             Route::name('editar.salvar.agenda')->post('editar-salvar-agenda/{id}','Admin\AgendaController@updateAgenda');
             Route::name('remover.agenda')->get('remover-agenda/{id}','Admin\AgendaController@removerAgenda');
 
+            //campo pesquisar pela agenda
+
+            Route::name('pesquisar.agenda')->post('pesquisar','Admin\AgendaController@pesquisar');
+
         });
 
         Route::group(['prefix' => 'usuario'], function () {

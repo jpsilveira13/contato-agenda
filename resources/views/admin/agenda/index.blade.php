@@ -21,8 +21,23 @@
                 <div class="panel-heading">Listagem Agendas </div>
                 <div class="panel-body">
                     <div class="pull-left"><a class="btn btn-lg btn-primary" href="{{route('nova.agenda')}}">Nova agenda</a></div><br /><br /><br />
-                    <div class="pull-left search"><input class="form-control" type="text" placeholder="Pesquisar"></div>
-                    <br />
+                    <div class="search">
+                        <div class="row">
+                            <div class="col-md-6">
+                            <form action="{{route('pesquisar.agenda')}}"  method="POST" >
+                                @csrf
+                                <div class="input-group col-md-12">
+                                <input  name="pesquisar" class="form-control input-lg" type="text" placeholder="Digite nome ou telefone">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-info btn-lg" type="submit">
+                                            <i class="glyphicon glyphicon-search"></i>
+                                        </button>
+                                     </span>
+                                </div>
+                            </form>
+                            </div>
+                        </div>
+                    </div>
                     <br />
                     <table class="table table-bordered table-hover table-responsive striped table-str" data-toggle="table"  data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name" data-sort-order="desc">
                         <thead>
@@ -61,7 +76,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="text-center">
-                {!! $agendas->render() !!}
+
             </div>
         </div>
     </div>

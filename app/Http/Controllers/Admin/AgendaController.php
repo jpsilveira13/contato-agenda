@@ -79,8 +79,6 @@ class AgendaController extends Controller
 
     }
 
-
-
     public function removerAgenda(Request $request,$id){
         $agenda = $this->agenda->find($id);
 
@@ -98,6 +96,12 @@ class AgendaController extends Controller
         return redirect()->route('agenda');
 
 
+    }
+
+    public function pesquisar(Request $request){
+        $campo = $request->input('pesquisar');
+        $agendas = $this->agenda->where('nome', 'like', '%'.$campo.'%')->orWhere('telefone', 'like', '%'.$campo.'%')->get();
+        return view('admin.agenda.index',compact('agendas'));
     }
 
 }
