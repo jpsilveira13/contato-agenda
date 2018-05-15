@@ -8,12 +8,11 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="panel panel-default">
-                <div class="panel-heading">Cadastro de Agenda</div>
+                <div class="panel-heading">Editar agenda do usuario: {{$agenda->nome}}</div>
                 <div class="panel-body">
                     <div class="col-md-12">
-                        <form action="{{ route('post.agenda') }}" method="POST" enctype="multipart/form-data" class="form-group" role="form">
+                        <form action="{{ route('editar.salvar.agenda',[$agenda->id]) }}" method="POST" enctype="multipart/form-data" class="form-group" role="form">
                             @csrf
-
                             <div class="form-group">
                                 <div class="file-upload">
                                     <button class="file-upload-btn" type="button" onclick="$('.file-upload-input').trigger( 'click' )">Adicionar Imagem</button>
@@ -25,8 +24,8 @@
                                                 Arraste e solte um arquivo ou seleccione a imagem</h3>
                                         </div>
                                     </div>
-                                    <div class="file-upload-content">
-                                        <img class="file-upload-image" src="#" alt="sua imagem" />
+                                    <div class="show file-upload-content">
+                                        <img class="file-upload-image" src="{{url('admin/imagens')}}/{{$agenda->url_foto}}" alt="sua imagem" />
                                         <div class="image-title-wrap">
                                             <button type="button" onclick="removeUpload()" class="remove-image">Remover <span class="image-title">Imagem cadastrada</span></button>
                                         </div>
@@ -37,7 +36,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Nome* </label>
-                                <input id="name" type="text" class="form-control{{ $errors->has('nome') ? ' is-invalid' : '' }}" name="nome" value="{{ old('nome') }}" required autofocus>
+                                <input id="name" type="text" class="form-control{{ $errors->has('nome') ? ' is-invalid' : '' }}" name="nome" value="{{$agenda->nome}}" required autofocus>
                                 @if ($errors->has('nome'))
                                     <span class="invalid-feedback">
                                         <strong>{{ $errors->first('nome') }}</strong>
@@ -46,7 +45,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Email * </label>
-                                <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required>
+                                <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{$agenda->email}}" required>
                                 @if ($errors->has('email'))
                                     <span class="invalid-feedback">
                                         <strong>{{ $errors->first('email') }}</strong>
@@ -55,7 +54,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Telefone * </label>
-                                <input id="email" type="tel" class="telefone form-control{{ $errors->has('telefone') ? ' is-invalid' : '' }}" name="telefone" value="{{ old('telefone') }}" required>
+                                <input id="email" type="tel" class="telefone form-control{{ $errors->has('telefone') ? ' is-invalid' : '' }}" name="telefone" value="{{$agenda->telefone}}" required>
                                 @if ($errors->has('telefone'))
                                     <span class="invalid-feedback">
                                         <strong>{{ $errors->first('telefone') }}</strong>
@@ -64,7 +63,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Data de Nascimento *</label>
-                                <input type="tel" name="data_nascimento" class="form-control{{ $errors->has('data_nascimento') ? ' is-invalid' : '' }} dataNascimento" required value="{{ old('data_nascimento') }}">
+                                <input type="tel" name="data_nascimento" class="form-control{{ $errors->has('data_nascimento') ? ' is-invalid' : '' }} dataNascimento" required value="@if($agenda->data_nascimento){{ date("d/m/Y", strtotime($agenda->data_nascimento)) }}@endif">
                                 @if ($errors->has('data_nascimento'))
                                     <span class="invalid-feedback">
                                         <strong>{{ $errors->first('data_nascimento') }}</strong>

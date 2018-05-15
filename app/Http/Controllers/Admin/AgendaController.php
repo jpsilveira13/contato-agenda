@@ -3,6 +3,7 @@
 namespace contatoagenda\Http\Controllers\Admin;
 
 use contatoagenda\Http\Requests\SalvarAgendaRequest;
+use contatoagenda\Http\Requests\UpdateAgendaRequest;
 use contatoagenda\Models\Agenda;
 
 use Illuminate\Http\Request;
@@ -44,6 +45,40 @@ class AgendaController extends Controller
         }
 
     }
+    public function editarAgenda($id){
+        $agenda = $this->agenda->find($id);
+        return view('admin.agenda.editar',compact('agenda'));
+    }
+
+
+    public function updateAgenda(UpdateAgendaRequest $request,$id){
+        $agenda = $this->agenda->fill($request->all());
+
+        $agendaBanco = $this->agenda->find($id);
+
+
+        if(!empty($request->file('arquivo'))){
+
+            if(file_exists(public_path().'/admin/imagens/'.$agendaBanco->url_foto)){
+
+                File::delete(public_path().'/admin/imagens/'.$agendaBanco->url_foto);
+
+            }
+            $imagem = $request->file('arquivo');
+
+            $agenda->url_foto = md5(date('Ymdhms').$imagem->getClientOriginalName()).'.'.$imagem->getClientOriginalExtension();
+            $path = public_path().'/admin/imagens/'.$agenda->url_foto;
+            Image::make($imagem->getRealPath())->resize(160,160)->save($path);
+
+        }
+        $agenda->data_nascimento = \DateTime::createFromFormat('d/m/Y', $agenda->data_nascimento)->format('Y-m-d');
+        $agenda = $agenda->toArray();
+        dd($agendaBanco->update($agenda));
+
+
+
+    }
+
 
 
     public function removerAgenda(Request $request,$id){
@@ -58,9 +93,9 @@ class AgendaController extends Controller
             }
         }
 
-            $agenda->delete();
-            $request->session()->flash('alert-success','Agenda deletada com sucesso!');
-            return redirect()->route('agenda');
+        $agenda->delete();
+        $request->session()->flash('alert-success','Agenda deletada com sucesso!');
+        return redirect()->route('agenda');
 
 
     }

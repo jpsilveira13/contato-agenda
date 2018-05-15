@@ -98,7 +98,7 @@ class UsuarioController extends Controller
             return redirect()->route('usuario');
         }else{
 
-            $request->session()->flash('alert-error', 'Ops! Houve um erro ao alterar sua senha. Tente novamente');
+            $request->session()->flash('alert-error', 'Ops! Houve um erro ao alterar a sua senha. Tente novamente');
             return redirect()->back();
         }
     }
