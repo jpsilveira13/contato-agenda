@@ -31,7 +31,7 @@
                             <th data-field="Nome" data-sortable="true">Nome</th>
                             <th data-field="E-mail"  data-sortable="true">Email</th>
                             <th data-field="Data de Criação" data-sortable="true">Data Criação</th>
-                            <th data-field="editar" data-sortable="true">Editar</th>
+                            <th data-field="editar" data-sortable="true">Editar/Trocar Senha</th>
                             <th data-field="remover" data-sortable="true">Deletar</th>
                         </tr>
                         </thead>
@@ -42,7 +42,10 @@
                                 <td class="vertical-middle" style="text-align: left">{{$usuario->name}}</td>
                                 <td class="vertical-middle" style="text-align: left">{{$usuario->email}}</td>
                                 <td class="vertical-middle">{{ date("d/m/Y H:i:s", strtotime($usuario->created_at)) }}</td>
-                                <td class="vertical-middle"><a class="btn btn-primary btn-xs" href="{{route('editar.usuario',['id'=> $usuario->id])}}"><span class="glyphicon glyphicon-pencil"></span></a></td>
+                                <td class="vertical-middle">
+                                    <a class="btn btn-primary btn-xs" href="{{route('editar.usuario',['id'=> $usuario->id])}}">
+                                        <span class="glyphicon glyphicon-pencil"></span></a> | <a class="btn btn-warning btn-xs" href="{{route('alterar.senha.usuario',['id'=> $usuario->id])}}"><span class="glyphicon glyphicon-lock
+"></span></a> </td>
                                 <td class="vertical-middle"><a class="delete btn btn-danger btn-xs" href="{{route('remover.usuario',['id' => $usuario->id])}}"><span class="glyphicon glyphicon-trash"></span></a></td>
                             </tr>
                         @endforeach

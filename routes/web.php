@@ -59,7 +59,9 @@ Route::group(['middleware' => 'auth', 'where' => ['id' => '[0-9]+']], function (
             Route::name('editar.usuario')->get('editar-usuario/{id}','Admin\UsuarioController@editarUsuario');
             Route::name('editar.salvar.usuario')->post('editar-salvar-usuario/{id}','Admin\UsuarioController@updateUsuario');
             Route::name('remover.usuario')->get('remover-usuario/{id}','Admin\UsuarioController@removerUsuario');
-
+            //rotas de alteração de senha
+            Route::name('alterar.senha.usuario')->get('alterar-senha/{id}','Admin\UsuarioController@alterarSenha');
+            Route::name('salvar.senha.usuario')->post('salvar-senha/{id}','Admin\UsuarioController@salvarSenha');
         });
 
     });

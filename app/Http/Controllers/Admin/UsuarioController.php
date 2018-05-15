@@ -8,6 +8,7 @@ use contatoagenda\Models\User;
 use Illuminate\Http\Request;
 use contatoagenda\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Input;
 
 class UsuarioController extends Controller
 {
@@ -49,8 +50,6 @@ class UsuarioController extends Controller
 
 
         if($request->filled('email') &&  $request->usuario_email != $request->email  ){
-
-
             $request->session()->flash('alert-error', 'Ops.. Existe um email com essa conta cadastrada!');
             return redirect()->back();
         }
@@ -68,6 +67,39 @@ class UsuarioController extends Controller
         if ($this->usuario->find($id)->delete()) {
             $request->session()->flash('alert-success', 'Deletado com sucesso!');
             return redirect()->route('usuario');
+        }
+    }
+
+    //funcao chamar view e alterar a senha
+
+    public function alterarSenha($id){
+
+        $usuario = $this->usuario->find($id);
+
+        return view('admin.usuario.trocar_senha',compact('usuario'));
+    }
+
+    public function salvarSenha($id,Request $request){
+        $this->validate($request, [
+            'old' => 'required',
+            'password' => 'required|min:6|confirmed',
+        ]);
+
+        $user = $this->usuario->find($id);
+
+        $hashedPassword = $user->password;
+        if (Hash::check($request->old, $hashedPassword)) {
+
+            //Change the password
+            $user->fill([
+                'password' => Hash::make($request->password)
+            ])->save();
+            $request->session()->flash('alert-success', 'A senha do usuário foi redefinida com sucesso.');
+            return redirect()->route('usuario');
+        }else{
+
+            $request->session()->flash('alert-error', 'Ops! Houve um erro ao alterar sua senha. Tente novamente');
+            return redirect()->back();
         }
     }
 
