@@ -25,6 +25,8 @@ function removeUpload() {
     if($('.file-upload-content').hasClass('show')){
        $('.file-upload-content').removeClass('show');
     }
+
+
     $('.file-upload-content').hide();
     $('.image-upload-wrap').show();
 }

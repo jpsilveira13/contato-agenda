@@ -13,11 +13,13 @@
                     <div class="col-md-12">
                         <form action="{{ route('editar.salvar.agenda',[$agenda->id]) }}" method="POST" enctype="multipart/form-data" class="form-group" role="form">
                             @csrf
+                            <input type="hidden" name="nome_agenda" value="{{$agenda->nome}}" />
+                            <input type="hidden" name="telefone_agenda" value="{{$agenda->telefone}}" />
                             <div class="form-group">
                                 <div class="file-upload">
                                     <button class="file-upload-btn" type="button" onclick="$('.file-upload-input').trigger( 'click' )">Adicionar Imagem</button>
 
-                                    <div class="image-upload-wrap">
+                                    <div class="image-upload-wrap" @if(!empty($agenda)) style="display: none" @endif>
                                         <input class="file-upload-input" type='file' name="arquivo" onchange="readURL(this);" accept="image/*" />
                                         <div class="drag-text">
                                             <h3>

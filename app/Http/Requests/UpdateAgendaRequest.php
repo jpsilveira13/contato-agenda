@@ -24,10 +24,10 @@ class UpdateAgendaRequest extends FormRequest
     public function rules()
     {
         return [
-            'nome' => 'required|exists:agenda',
+            'nome' => 'required',
             'url_foto' => 'mimes:jpeg,bmp,png|max:1000',
             'email' => 'required|string|max:255|',
-            'telefone' => 'required|string|max:255|exists:agenda',
+            'telefone' => 'required',
             'data_nascimento' => 'required',
 
         ];

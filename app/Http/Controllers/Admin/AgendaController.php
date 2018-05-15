@@ -56,7 +56,11 @@ class AgendaController extends Controller
 
         $agendaBanco = $this->agenda->find($id);
 
-
+        if($request->filled('nome') && $request){
+            dd('possui');
+        }else{
+            dd('nao possui');
+        }
         if(!empty($request->file('arquivo'))){
 
             if(file_exists(public_path().'/admin/imagens/'.$agendaBanco->url_foto)){
@@ -73,9 +77,13 @@ class AgendaController extends Controller
         }
         $agenda->data_nascimento = \DateTime::createFromFormat('d/m/Y', $agenda->data_nascimento)->format('Y-m-d');
         $agenda = $agenda->toArray();
-        dd($agendaBanco->update($agenda));
-
-
+        if($agendaBanco->update($agenda)){
+            $request->session()->flash('alert-success','Agenda atualizada com sucesso!');
+            return redirect()->route('agenda');
+        }else{
+            $request->session()->flash('alert-error','Houve um erro ao atualizar a agenda!');
+            return redirect()->back();
+        }
 
     }
 
