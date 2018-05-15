@@ -160,7 +160,8 @@ return [
         // contatoagenda\Providers\BroadcastServiceProvider::class,
         contatoagenda\Providers\EventServiceProvider::class,
         contatoagenda\Providers\RouteServiceProvider::class,
-
+        //dingo api
+        Dingo\Api\Provider\LaravelServiceProvider::class,
     ],
 
     /*
